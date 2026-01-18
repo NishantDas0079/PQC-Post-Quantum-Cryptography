@@ -1,6 +1,35 @@
 # Post-Quantum Cryptography & Side-Channel Analysis
 # ML-KEM (Kyber) — Theory, Implementation, and Real-World Security Risks
 
+```mermaid
+flowchart TD
+    PQC["Post-Quantum Cryptography (PQC)"]
+    
+    subgraph "NIST-Standardized ML-KEM (Kyber) - FIPS 203"
+        direction LR
+        K_Algo["Algorithm<br>Based on Learning With Errors (LWE)"]
+        K_Process["Process: KeyGen → Encaps → Decaps"]
+    end
+
+    PQC --> K_Algo
+    PQC --> K_Process
+
+    subgraph "Primary Real-World Threat"
+        SCA["Side-Channel Attacks (SCA)"]
+        
+        SCA_Type["Attack Vectors"] --> SCA1["Power Analysis<br>(CPA, Template Attacks)"]
+        SCA_Type --> SCA2["Timing Attacks"]
+        SCA_Type --> SCA3["Electromagnetic (EM)"]
+        SCA_Type --> SCA4["Fault Injection"]
+    end
+
+    K_Process -- "Attack Target" --> SCA
+    SCA1 -- "Most Effective<br>Against ML-KEM Decapsulation" --> Target
+    
+    PQC --> KeyMessage["Core Insight: ML-KEM is mathematically<br>quantum-safe but physically vulnerable."]
+```
+
+
 This repository presents a comprehensive study of ML-KEM (Kyber) — the NIST-standardized post-quantum Key Encapsulation Mechanism (FIPS-203) — with a strong focus on practical security.
 
 While ML-KEM is mathematically secure against quantum attacks, real-world implementations remain vulnerable to side-channel attacks (SCA).
